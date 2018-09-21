@@ -35,10 +35,10 @@ public class SpreadsheetWriterConfig {
     @Value("${spreadsheetwriter.credentials.filepath}")
     private String credentialsFilePath = "/home/nikolai/Downloads/credentials.json";
     
-    @Value("${spreadsheetwriter.auth.host")
+    @Value("${spreadsheetwriter.auth.host}")
     private String host;
     
-    @Value("${spreadsheetwriter.auth.port")
+    @Value("${spreadsheetwriter.auth.port}")
     private int port;
     
     @Value("${spreadsheetwriter.user}")
