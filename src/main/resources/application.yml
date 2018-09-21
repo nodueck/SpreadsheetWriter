@@ -5,6 +5,9 @@ logging:
     org.springframework: DEBUG
     
 spreadsheetwriter:
+  auth:
+    host: localhost
+    port: 34533
   credentials:
     filepath: /home/nikolai/credentials.json
   user:

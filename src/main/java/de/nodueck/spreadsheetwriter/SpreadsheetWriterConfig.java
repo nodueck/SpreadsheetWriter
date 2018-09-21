@@ -34,6 +34,13 @@ public class SpreadsheetWriterConfig {
     
     @Value("${spreadsheetwriter.credentials.filepath}")
     private String credentialsFilePath = "/home/nikolai/Downloads/credentials.json";
+    
+    @Value("${spreadsheetwriter.auth.host")
+    private String host;
+    
+    @Value("${spreadsheetwriter.auth.port")
+    private int port;
+    
     @Value("${spreadsheetwriter.user}")
     private String user = "user";
     
@@ -53,17 +60,21 @@ public class SpreadsheetWriterConfig {
      */
     private Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
         // Load client secrets.
-        FileInputStream file = new FileInputStream(new File(credentialsFilePath));
-        InputStreamReader reader = new InputStreamReader(file);
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, reader);
+        final FileInputStream file = new FileInputStream(new File(credentialsFilePath));
+        final InputStreamReader reader = new InputStreamReader(file);
+        final GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, reader);
 
         // Build flow and trigger user authorization request.
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+        final GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
                 HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
                 .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
                 .setAccessType("offline")
                 .build();
-        return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
+        final LocalServerReceiver localServerReceiver = new LocalServerReceiver.Builder()
+	        .setPort(port)
+	        .setHost(host)
+	        .build();
+        return new AuthorizationCodeInstalledApp(flow, localServerReceiver).authorize(user);
     }
 
 }
