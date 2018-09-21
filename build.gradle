@@ -34,6 +34,8 @@ bootJar {
     version = "0.1.0"
 }
 
+mainClassName = "de.nodueck.spreadsheetwriter.SpreadsheetWriterApp"
+
 dependencies {
 	// Spring
     compile("org.springframework.boot:spring-boot-starter-web")
