@@ -1,0 +1,11 @@
+server:
+  port: 8000
+logging:
+  level:
+    org.springframework: DEBUG
+    
+spreadsheetwriter:
+  credentials:
+    filepath: /home/nikolai/credentials.json
+  user:
+    nikolai.dueck@googlemail.com    
