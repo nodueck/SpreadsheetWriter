@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.extensions.java6.auth.oauth2.AbstractPromptReceiver;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
@@ -70,11 +71,14 @@ public class SpreadsheetWriterConfig {
                 .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
                 .setAccessType("offline")
                 .build();
-        final LocalServerReceiver localServerReceiver = new LocalServerReceiver.Builder()
-	        .setPort(port)
-	        .setHost(host)
-	        .build();
-        return new AuthorizationCodeInstalledApp(flow, localServerReceiver).authorize(user);
+        
+        final AbstractPromptReceiver abstractPromptReceiver = new AbstractPromptReceiver() {
+			@Override
+			public String getRedirectUri() throws IOException {
+				return "http://" + host + ":" + port + "/Callback";
+			}
+		};
+        return new AuthorizationCodeInstalledApp(flow, abstractPromptReceiver).authorize(user);
     }
 
 }
