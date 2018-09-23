@@ -2,13 +2,18 @@ package de.nodueck.spreadsheetwriter.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class InsertRow {
 	
+	@JsonProperty("range")
 	private String range;
 	
+	@JsonProperty("row")
 	private List<Object> row;
 	
-	private String spreadSheetId;
+	@JsonProperty("spreadsheetId")
+	private String spreadsheetId;
 
 	public String getRange() {
 		return range;
@@ -26,11 +31,11 @@ public class InsertRow {
 		this.row = row;
 	}
 
-	public String getSpreadSheetId() {
-		return spreadSheetId;
+	public String getSpreadsheetId() {
+		return spreadsheetId;
 	}
 
-	public void setSpreadSheetId(String spreadSheetId) {
-		this.spreadSheetId = spreadSheetId;
+	public void setSpreadsheetId(String spreadsheetId) {
+		this.spreadsheetId = spreadsheetId;
 	}
 }
