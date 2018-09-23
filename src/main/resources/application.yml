@@ -2,7 +2,7 @@ server:
   port: 8000
 logging:
   level:
-    org.springframework: DEBUG
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
     
 spreadsheetwriter:
   auth:
