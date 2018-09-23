@@ -16,7 +16,7 @@ public class SpreadsheetWriterController {
 	
     @RequestMapping("/insertRow")
     public void index(@RequestBody InsertRow insertRow) {
-    	service.insertRow(insertRow.getSpreadSheetId(), insertRow.getRange(), insertRow.getRow());
+    	service.insertRow(insertRow.getSpreadsheetId(), insertRow.getRange(), insertRow.getRow());
         return;
     }
 
